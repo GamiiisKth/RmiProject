@@ -7,6 +7,9 @@ import java.rmi.registry.Registry;
 /**
  * Created by joshuapro on 2015-11-24.
  */
+
+
+// client
 public class RegAccount  {
     private static final String Host="localhost";
     private static final int PORT=5133;
