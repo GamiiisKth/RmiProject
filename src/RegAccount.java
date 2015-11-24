@@ -1,20 +1,23 @@
 import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 /**
  * Created by joshuapro on 2015-11-24.
  */
 public class RegAccount  {
+    private static final String Host="localhost";
+    private static final int PORT=5133;
+    private static Registry registry;
 
-    public static void main(String [] args){
-        try {
+    public static void main(String [] args) throws RemoteException, NotBoundException {
+      registry =LocateRegistry.getRegistry(Host,PORT);
+        Account account= (Account)registry.lookup(Account.class.getName());
+        account.deposit(12000);
 
-            AccountImlp acct= new AccountImlp("JimF");
-            Naming.rebind("JimF",acct);
-            System.out.println("Registered account");
-        }catch (Exception e){
+        System.out.println("Balance " + account.getBalance() +" Name "+ account.getName());
 
-            e.printStackTrace();
-
-        }
     }
 }
